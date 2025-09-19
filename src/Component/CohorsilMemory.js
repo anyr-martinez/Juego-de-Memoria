@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import logo from "../Assets/logo2.png";
 
 const MemoryGame = () => {
@@ -18,7 +18,7 @@ const MemoryGame = () => {
   const [startTime, setStartTime] = useState(null);
   const [elapsedTime, setElapsedTime] = useState(0);
 
-  const createCards = () => {
+  const createCards = useCallback(() => {
     const gameCards = [];
     for (let i = 0; i < 32; i++) {
       const symbol = symbols[i];
@@ -26,9 +26,9 @@ const MemoryGame = () => {
       gameCards.push({ id: i * 2 + 1, symbol, matched: false });
     }
     return gameCards.sort(() => Math.random() - 0.5);
-  };
+  }, [symbols]);
 
-  const initGame = () => {
+  const initGame = useCallback(() => {
     const newCards = createCards();
     setCards(newCards);
     setFlippedCards([]);
@@ -38,9 +38,7 @@ const MemoryGame = () => {
     setGamePaused(false);
     setStartTime(Date.now());
     setElapsedTime(0);
-  };
-
-
+  }, [createCards]);
 
   const handleCardClick = (cardId) => {
     if (flippedCards.length === 2) return;
@@ -52,9 +50,9 @@ const MemoryGame = () => {
     setFlippedCards(newFlippedCards);
 
     if (newFlippedCards.length === 2) {
-      setMoves(m => m + 1);
-      const card1 = cards.find(card => card.id === newFlippedCards[0]);
-      const card2 = cards.find(card => card.id === newFlippedCards[1]);
+      setMoves((m) => m + 1);
+      const card1 = cards.find((card) => card.id === newFlippedCards[0]);
+      const card2 = cards.find((card) => card.id === newFlippedCards[1]);
 
       if (card1.symbol === card2.symbol) {
         setTimeout(() => {
@@ -88,7 +86,8 @@ const MemoryGame = () => {
 
   useEffect(() => {
     initGame();
-  }, []);
+  }, [initGame]);
+
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
@@ -97,18 +96,16 @@ const MemoryGame = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br to-red-50 p-4">
-      <div className="max-w-6xl">
+      <div className="max-w-6xl mx-auto">
         {gamePaused && !gameWon && (
-          <div className="max-w-6xl mx-auto">
-            <div className="bg-gradient-to-r from-gray-400 to-gray-600 text-white p-6 rounded-lg text-center mb-6 shadow-lg animate-pulse">
-              <h2 className="text-3xl font-bold mb-2">⏸️ Juego en pausa</h2>
-              <p className="text-xl mb-2">El juego ha sido pausado.</p>
-              <p className="text-lg">Presiona "Nuevo Juego" para reiniciar.</p>
-            </div>
+          <div className="bg-gradient-to-r from-gray-400 to-gray-600 text-white p-6 rounded-lg text-center mb-6 shadow-lg animate-pulse">
+            <h2 className="text-3xl font-bold mb-2">⏸️ Juego en pausa</h2>
+            <p className="text-xl mb-2">El juego ha sido pausado.</p>
+            <p className="text-lg">Presiona "Nuevo Juego" para reiniciar.</p>
           </div>
         )}
 
-        <div className="flex flex-col mb-6 bg-white rounded-lg shadow-lg p-6 max-w-6xl mx-auto">
+        <div className="flex flex-col mb-6 bg-white rounded-lg shadow-lg p-6">
           <div className="flex flex-wrap items-center justify-between w-full mb-4">
             <div className="flex items-center space-x-4">
               <div className="flex items-center justify-center">
@@ -179,7 +176,7 @@ const MemoryGame = () => {
           </div>
         </div>
 
-        <div className="max-w-6xl mx-auto flex justify-end gap-4 mb-6">
+        <div className="flex justify-end gap-4 mb-6">
           <button
             onClick={initGame}
             className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold py-3 px-6 rounded-full transition transform hover:scale-105 shadow-lg"
