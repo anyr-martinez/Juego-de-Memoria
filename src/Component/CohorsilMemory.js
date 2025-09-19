@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from "../Assets/logo2.png";
 
 const MemoryGame = () => {
@@ -28,7 +28,7 @@ const MemoryGame = () => {
     return gameCards.sort(() => Math.random() - 0.5);
   };
 
-  const initGame = useCallback(() => {
+  const initGame = () => {
     const newCards = createCards();
     setCards(newCards);
     setFlippedCards([]);
@@ -38,7 +38,9 @@ const MemoryGame = () => {
     setGamePaused(false);
     setStartTime(Date.now());
     setElapsedTime(0);
-  }, []);
+  };
+
+
 
   const handleCardClick = (cardId) => {
     if (flippedCards.length === 2) return;
@@ -86,8 +88,7 @@ const MemoryGame = () => {
 
   useEffect(() => {
     initGame();
-  }, [initGame]);
-
+  }, []);
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
