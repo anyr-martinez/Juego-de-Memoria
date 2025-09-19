@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import logo from "../Assets/logo2.png";
 
 const MemoryGame = () => {
@@ -28,7 +28,7 @@ const MemoryGame = () => {
     return gameCards.sort(() => Math.random() - 0.5);
   };
 
-  const initGame = () => {
+  const initGame = useCallback(() => {
     const newCards = createCards();
     setCards(newCards);
     setFlippedCards([]);
@@ -38,7 +38,7 @@ const MemoryGame = () => {
     setGamePaused(false);
     setStartTime(Date.now());
     setElapsedTime(0);
-  };
+  }, []);
 
   const handleCardClick = (cardId) => {
     if (flippedCards.length === 2) return;
@@ -86,7 +86,7 @@ const MemoryGame = () => {
 
   useEffect(() => {
     initGame();
-  }, []);
+  }, [initGame]);
 
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
@@ -97,7 +97,6 @@ const MemoryGame = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br to-red-50 p-4">
       <div className="max-w-6xl">
-        {/* Mensaje de pausa si el juego fue parado pero no ganado */}
         {gamePaused && !gameWon && (
           <div className="max-w-6xl mx-auto">
             <div className="bg-gradient-to-r from-gray-400 to-gray-600 text-white p-6 rounded-lg text-center mb-6 shadow-lg animate-pulse">
@@ -108,7 +107,6 @@ const MemoryGame = () => {
           </div>
         )}
 
-        {/* Card principal: Logo, título, stats, felicitaciones y tablero */}
         <div className="flex flex-col mb-6 bg-white rounded-lg shadow-lg p-6 max-w-6xl mx-auto">
           <div className="flex flex-wrap items-center justify-between w-full mb-4">
             <div className="flex items-center space-x-4">
@@ -132,7 +130,7 @@ const MemoryGame = () => {
               </div>
             </div>
           </div>
-          {/* Mensaje de victoria después del logo y stats */}
+
           {gameWon && (
             <div className="w-full">
               <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-6 rounded-lg text-center mb-6 shadow-lg animate-pulse w-full">
@@ -144,7 +142,7 @@ const MemoryGame = () => {
               </div>
             </div>
           )}
-          {/* Tablero del juego */}
+
           <div className="bg-white rounded-lg shadow-inner p-2">
             <div className="grid grid-cols-8 gap-1 max-w-xl mx-auto">
               {cards.map((card) => {
@@ -180,7 +178,6 @@ const MemoryGame = () => {
           </div>
         </div>
 
-        {/* Botones de control */}
         <div className="max-w-6xl mx-auto flex justify-end gap-4 mb-6">
           <button
             onClick={initGame}
