@@ -5,14 +5,14 @@ const MemoryGame = () => {
 
   // Preguntas y respuestas
   const qaPairs = React.useMemo(() => [
-    { question: 'Royal', answer: 'Esfera Max', image: 'esfera-max.png' },
-    { question: 'Tizón Tardío', answer: 'Orondis', image: 'orondis.png' },
-    { question: 'Nematodos', answer: 'Verango', image: 'verango.png' },
-    { question: 'Deficiencia de Calcio', answer: 'Metalosote Calcio', image: 'metalosote_calcio.png' },
-    { question: 'Botrytis', answer: 'Miravis', image: 'miravis.png' },
-    { question: 'Control del Estrés de la Planta', answer: 'Everest', image: 'everest.png' },
-    { question: 'Mosca Blanca', answer: 'Pecuseta', image: 'pecuseta.png' },
-    { question: 'Acidez del Suelo', answer: 'Acical', image: 'acical.png' },
+    { question: 'Royal', answer: 'Esfera Max', image: 'esfera.jpg' },
+    { question: 'Tizón Tardío', answer: 'Orondis', image: 'orondis.jpg' },
+    { question: 'Nematodos', answer: 'Verango', image: 'verango.jpg' },
+    { question: 'Deficiencia de Calcio', answer: 'Metalosote Calcio', image: 'metalosote.jpg' },
+    { question: 'Botrytis', answer: 'Miravis', image: 'miravis.jpg' },
+    { question: 'Control del Estrés de la Planta', answer: 'Everest', image: 'everest.jpg' },
+    { question: 'Mosca Blanca', answer: 'Pecuseta', image: 'pecuseta.jpg' },
+    { question: 'Acidez del Suelo', answer: 'Acical', image: 'acical.jpg' },
   ], []);
 
   const [cards, setCards] = useState([]);
@@ -152,7 +152,7 @@ return (
           aspectRatio: '1/1',
         }}
       >
-        <div className="grid grid-cols-4 gap-6 sm:gap-8 md:gap-10 w-full h-full">
+  <div className="grid grid-cols-4 gap-2 sm:gap-3 md:gap-4 w-full h-full">
           {cards.map(card => {
             const isFlipped = flippedCards.includes(card.id) || matchedCards.includes(card.id);
             const isMatched = matchedCards.includes(card.id);
@@ -187,7 +187,7 @@ return (
                     : 'bg-gradient-to-br from-red-400 to-red-500 hover:from-red-500 hover:to-red-600 text-white'}
                   ${isMatched ? 'ring-4 ring-blue-300 ring-opacity-50' : ''}
                 `}
-                style={{ pointerEvents: gamePaused || gameWon ? 'none' : 'auto', minWidth: '140px', minHeight: '120px', wordBreak: 'break-word', overflowWrap: 'break-word', hyphens: 'auto', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                style={{ pointerEvents: gamePaused || gameWon ? 'none' : 'auto', minWidth: '170px', minHeight: '140px', wordBreak: 'break-word', overflowWrap: 'break-word', hyphens: 'auto', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
               >
                 {isFlipped ? (
                   card.isQuestion ? (
