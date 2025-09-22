@@ -8,11 +8,11 @@ const MemoryGame = () => {
     { question: 'Royal', answer: 'Esfera Max', image: 'esfera-max.png' },
     { question: 'Tizón Tardío', answer: 'Orondis', image: 'orondis.png' },
     { question: 'Nematodos', answer: 'Verango', image: 'verango.png' },
-    { question: 'Deficiencia de Calcio', answer: 'Metal', image: 'metal.png' },
-    { question: 'Botrytis', answer: 'miravis', image: 'miravis.png' },
-    { question: 'Control del Estrés  de la Planta', answer: 'Everest', image: 'everest.png' },
+    { question: 'Deficiencia de Calcio', answer: 'Metalosote Calcio', image: 'metalosote_calcio.png' },
+    { question: 'Botrytis', answer: 'Miravis', image: 'miravis.png' },
+    { question: 'Control del Estrés de la Planta', answer: 'Everest', image: 'everest.png' },
     { question: 'Mosca Blanca', answer: 'Pecuseta', image: 'pecuseta.png' },
-    { question: 'Acidez del Suelo', answer: 'Asical', image: 'asical.png' },
+    { question: 'Acidez del Suelo', answer: 'Acical', image: 'acical.png' },
   ], []);
 
   const [cards, setCards] = useState([]);
@@ -120,12 +120,12 @@ return (
     min-h-screen w-full flex items-center justify-center
     bg-gradient-to-br to-red-50 p-2 sm:p-4 overflow-x-hidden
   ">
-  <div className="flex flex-col items-center w-full max-w-full mx-auto mt-20 sm:mt-28 md:mt-36">
+  <div className="flex flex-col items-center w-full max-w-full mx-auto mt-8 sm:mt-12 md:mt-16">
 
       {/* Logo + título */}
       <img src={logo} alt="Logo Cohorsil"
         className="h-32 w-56 sm:h-40 sm:w-72 md:h-52 md:w-[22rem] mb-6 object-contain" />
-  <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-800 text-center mb-2">
+      <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-800 text-center mb-2">
         Memoria COHORSIL
       </h1>
       <p className="text-gray-600 italic text-center mt-1 text-lg sm:text-2xl md:text-3xl mb-4">
@@ -159,7 +159,7 @@ return (
 
             const pairColors = [
               'from-blue-400 to-blue-500',
-              'from-green-400 to-green-500',
+              'from-green-600 to-green-600',
               'from-yellow-400 to-yellow-500',
               'from-pink-400 to-pink-500',
               'from-purple-400 to-purple-500',
@@ -177,9 +177,9 @@ return (
                 key={card.id}
                 onClick={() => handleCardClick(card.id)}
                 className={`
-                  aspect-square rounded-lg cursor-pointer transition-all duration-500 flex items-center 
-                  ${card.text === 'Nematodos' && card.isQuestion ? 'justify-start' : 'justify-center'} 
-                  text-lg sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold shadow p-4 sm:p-8 
+                  aspect-square rounded-lg cursor-pointer transition-all duration-500 flex items-center justify-center
+                  text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold shadow p-2 sm:p-4
+                  whitespace-pre-line break-words text-center
                   ${isFlipped
                     ? isMatched
                       ? `bg-gradient-to-br ${matchedPairColor} text-white`
@@ -187,11 +187,11 @@ return (
                     : 'bg-gradient-to-br from-red-400 to-red-500 hover:from-red-500 hover:to-red-600 text-white'}
                   ${isMatched ? 'ring-4 ring-blue-300 ring-opacity-50' : ''}
                 `}
-                style={{ pointerEvents: gamePaused || gameWon ? 'none' : 'auto', minWidth: '140px', minHeight: '120px', wordBreak: 'break-word' }}
+                style={{ pointerEvents: gamePaused || gameWon ? 'none' : 'auto', minWidth: '140px', minHeight: '120px', wordBreak: 'break-word', overflowWrap: 'break-word', hyphens: 'auto', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
               >
                 {isFlipped ? (
                   card.isQuestion ? (
-                    <span className="block w-full px-4 py-4 text-lg sm:text-2xl md:text-4xl font-bold text-center">
+                    <span className="block w-full px-2 py-2 text-base sm:text-xl md:text-2xl font-bold text-center leading-tight break-words whitespace-pre-line" style={{wordBreak:'break-word', overflowWrap:'break-word', hyphens:'auto'}}>
                       {card.text}
                     </span>
                   ) : (
@@ -199,10 +199,11 @@ return (
                       <img
                         src={require(`../Assets/${card.image}`)}
                         alt={card.text}
-                        className="w-32 h-32 sm:w-40 sm:h-40 md:w-56 md:h-56 object-contain mx-auto"
+                        className="w-[92%] h-[92%] object-contain mx-auto block rounded-lg"
+                        style={{display:'block', margin:'0 auto'}}
                       />
                     ) : (
-                      <span className="text-lg sm:text-xl md:text-2xl font-bold">{card.text}</span>
+                      <span className="text-base sm:text-xl md:text-2xl font-bold">{card.text}</span>
                     )
                   )
                 ) : (
