@@ -187,7 +187,7 @@ return (
                     : 'bg-gradient-to-br from-red-400 to-red-500 hover:from-red-500 hover:to-red-600 text-white'}
                   ${isMatched ? 'ring-4 ring-blue-300 ring-opacity-50' : ''}
                 `}
-                style={{ pointerEvents: gamePaused || gameWon ? 'none' : 'auto', minWidth: '170px', minHeight: '140px', wordBreak: 'break-word', overflowWrap: 'break-word', hyphens: 'auto', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                style={{ pointerEvents: gamePaused || gameWon ? 'none' : 'auto', minWidth: '200px', minHeight: '170px', wordBreak: 'break-word', overflowWrap: 'break-word', hyphens: 'auto', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
               >
                 {isFlipped ? (
                   card.isQuestion ? (
@@ -220,8 +220,8 @@ return (
         <button
           onClick={initGame}
           className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 
-                     text-white font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-full transition 
-                     transform hover:scale-105 shadow-lg w-full text-base sm:text-lg md:text-xl"
+                     text-white font-bold py-4 px-6 sm:py-5 sm:px-10 rounded-full transition 
+                     transform hover:scale-105 shadow-lg w-full text-lg sm:text-2xl md:text-3xl"
         >
           🔄 Nuevo Juego
         </button>
