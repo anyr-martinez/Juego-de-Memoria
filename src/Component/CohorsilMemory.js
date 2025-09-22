@@ -9,8 +9,8 @@ const MemoryGame = () => {
     { question: 'Tizón Tardío', answer: 'Orondis', image: 'orondis.png' },
     { question: 'Nematodos', answer: 'Verango', image: 'verango.png' },
     { question: 'Deficiencia de Calcio', answer: 'Metal', image: 'metal.png' },
-    { question: 'Miravis', answer: 'Botritis', image: 'botritis.png' },
-    { question: 'Control del Estrés  de la Planta', answer: 'Hebredes', image: 'hebredes.png' },
+    { question: 'Botrytis', answer: 'miravis', image: 'miravis.png' },
+    { question: 'Control del Estrés  de la Planta', answer: 'Everest', image: 'everest.png' },
     { question: 'Mosca Blanca', answer: 'Pecuseta', image: 'pecuseta.png' },
     { question: 'Acidez del Suelo', answer: 'Asical', image: 'asical.png' },
   ], []);
@@ -120,15 +120,15 @@ return (
     min-h-screen w-full flex items-center justify-center
     bg-gradient-to-br to-red-50 p-2 sm:p-4 overflow-x-hidden
   ">
-    <div className="flex flex-col items-center w-full max-w-full mx-auto">
+  <div className="flex flex-col items-center w-full max-w-full mx-auto mt-20 sm:mt-28 md:mt-36">
 
       {/* Logo + título */}
       <img src={logo} alt="Logo Cohorsil"
-        className="h-16 w-32 sm:h-20 sm:w-40 md:h-24 md:w-60 mt-4 mb-2 object-contain" />
-      <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 text-center">
+        className="h-32 w-56 sm:h-40 sm:w-72 md:h-52 md:w-[22rem] mb-6 object-contain" />
+  <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-800 text-center mb-2">
         Memoria COHORSIL
       </h1>
-      <p className="text-gray-600 italic text-center mt-1 text-sm sm:text-base md:text-lg mb-2">
+      <p className="text-gray-600 italic text-center mt-1 text-lg sm:text-2xl md:text-3xl mb-4">
         ¡Somos innovación Agropecuaria!
       </p>
 
@@ -145,14 +145,14 @@ return (
 
       {/* Tablero */}
       <div
-        className="bg-white rounded-lg shadow-inner p-1 sm:p-2 flex items-center justify-center mx-auto mt-4 mb-4
-                   w-full max-w-[95vw] sm:max-w-[600px] lg:max-w-[800px]"
+        className="bg-white rounded-lg shadow-inner p-4 sm:p-6 flex items-center justify-center mx-auto mt-8 mb-8
+                   w-full max-w-[98vw] sm:max-w-[800px] lg:max-w-[1100px]"
         style={{
-          height: 'min(90vw, 70vh, 600px)',
+          height: 'min(98vw, 85vh, 900px)',
           aspectRatio: '1/1',
         }}
       >
-        <div className="grid grid-cols-4 gap-2 sm:gap-4 md:gap-6 w-full h-full">
+        <div className="grid grid-cols-4 gap-6 sm:gap-8 md:gap-10 w-full h-full">
           {cards.map(card => {
             const isFlipped = flippedCards.includes(card.id) || matchedCards.includes(card.id);
             const isMatched = matchedCards.includes(card.id);
@@ -179,7 +179,7 @@ return (
                 className={`
                   aspect-square rounded-lg cursor-pointer transition-all duration-500 flex items-center 
                   ${card.text === 'Nematodos' && card.isQuestion ? 'justify-start' : 'justify-center'} 
-                  text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-bold shadow p-1 sm:p-2 
+                  text-lg sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold shadow p-4 sm:p-8 
                   ${isFlipped
                     ? isMatched
                       ? `bg-gradient-to-br ${matchedPairColor} text-white`
@@ -187,11 +187,11 @@ return (
                     : 'bg-gradient-to-br from-red-400 to-red-500 hover:from-red-500 hover:to-red-600 text-white'}
                   ${isMatched ? 'ring-4 ring-blue-300 ring-opacity-50' : ''}
                 `}
-                style={{ pointerEvents: gamePaused || gameWon ? 'none' : 'auto', minWidth: '60px', minHeight: '40px', wordBreak: 'break-word' }}
+                style={{ pointerEvents: gamePaused || gameWon ? 'none' : 'auto', minWidth: '140px', minHeight: '120px', wordBreak: 'break-word' }}
               >
                 {isFlipped ? (
                   card.isQuestion ? (
-                    <span className="block w-full px-1 py-1 text-xs xs:text-sm sm:text-lg md:text-xl font-bold text-center">
+                    <span className="block w-full px-4 py-4 text-lg sm:text-2xl md:text-4xl font-bold text-center">
                       {card.text}
                     </span>
                   ) : (
@@ -199,7 +199,7 @@ return (
                       <img
                         src={require(`../Assets/${card.image}`)}
                         alt={card.text}
-                        className="w-14 h-14 xs:w-20 xs:h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 object-contain mx-auto"
+                        className="w-32 h-32 sm:w-40 sm:h-40 md:w-56 md:h-56 object-contain mx-auto"
                       />
                     ) : (
                       <span className="text-lg sm:text-xl md:text-2xl font-bold">{card.text}</span>
