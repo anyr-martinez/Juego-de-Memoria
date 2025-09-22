@@ -15,3 +15,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+/* Forzar diseño vertical en pantallas muy panorámicas */
+@media (max-aspect-ratio: 16/9) {
+  .memory-container {
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+  }
+}
+
