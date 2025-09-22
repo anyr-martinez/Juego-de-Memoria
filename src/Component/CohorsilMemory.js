@@ -5,14 +5,14 @@ const MemoryGame = () => {
 
   // Preguntas y respuestas
   const qaPairs = React.useMemo(() => [
-    { question: 'Royal', answer: 'Esfera Max', image: 'esfera.jpg' },
-    { question: 'Tizón Tardío', answer: 'Orondis', image: 'orondis.jpg' },
-    { question: 'Nematodos', answer: 'Verango', image: 'verango.jpg' },
-    { question: 'Deficiencia de Calcio', answer: 'Metalosote Calcio', image: 'metalosote.jpg' },
-    { question: 'Botrytis', answer: 'Miravis', image: 'miravis.jpg' },
-    { question: 'Control del Estrés de la Planta', answer: 'Everest', image: 'everest.jpg' },
-    { question: 'Mosca Blanca', answer: 'Pecuseta', image: 'pecuseta.jpg' },
-    { question: 'Acidez del Suelo', answer: 'Acical', image: 'acical.jpg' },
+    { question: 'Royal', answer: 'Esfera Max', image: 'esfera.png' },
+    { question: 'Tizón Tardío', answer: 'Orondis', image: 'orondis.png' },
+    { question: 'Nematodos', answer: 'Verango', image: 'verango.png' },
+    { question: 'Deficiencia de Calcio', answer: 'Metalosote Calcio', image: 'metalosote.png' },
+    { question: 'Botrytis', answer: 'Miravis', image: 'miravis.png' },
+    { question: 'Control del Estrés de la Planta', answer: 'Everest', image: 'everest.png' },
+    { question: 'Mosca Blanca', answer: 'Pecuseta', image: 'pecuseta.png' },
+    { question: 'Acidez del Suelo', answer: 'Acical', image: 'acical.png' },
   ], []);
 
   const [cards, setCards] = useState([]);
@@ -199,7 +199,7 @@ return (
                       <img
                         src={require(`../Assets/${card.image}`)}
                         alt={card.text}
-                        className="w-[92%] h-[92%] object-contain mx-auto block rounded-lg"
+                        className="w-[98%] h-[98%] object-cover mx-auto block rounded-lg"
                         style={{display:'block', margin:'0 auto'}}
                       />
                     ) : (
