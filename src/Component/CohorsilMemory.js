@@ -5,13 +5,11 @@ const MemoryGame = () => {
 
   // Preguntas y respuestas
   const qaPairs = React.useMemo(() => [
-    { question: 'Royal', answer: 'Esfera Max', image: 'esfera.png' },
-    { question: 'Tizón Tardío', answer: 'Orondis', image: 'orondis.png' },
-    { question: 'Nematodos', answer: 'Verango', image: 'verango.png' },
+    { question: 'Roya', answer: 'Esfera Max', image: 'esfera.png' },
+    { question: 'Broca', answer: 'Incipio', image: 'incipio.png' },
+    { question: 'Enmienda Agricola', answer: 'Nutrical', image: 'nutrical.png' },
     { question: 'Deficiencia de Calcio', answer: 'Metalosote Calcio', image: 'metalosate.png' },
-    { question: 'Botrytis', answer: 'Miravis', image: 'miravis.png' },
-    { question: 'Control del Estrés de la Planta', answer: 'Everest', image: 'everest.png' },
-    { question: 'Mosca Blanca', answer: 'Pecuseta', image: 'pecuseta.png' },
+    { question: 'Atracnosis', answer: 'Amistar Extra', image: 'amistar.png' },
     { question: 'Acidez del Suelo', answer: 'Acical', image: 'acical.png' },
   ], []);
 
@@ -130,12 +128,14 @@ return (
     min-h-screen w-full flex items-center justify-center
     bg-gradient-to-br to-red-50 p-2 sm:p-4 overflow-x-hidden
   ">
-  <div className="flex flex-col items-center w-full max-w-full mx-auto mt-8 sm:mt-12 md:mt-16">
+  <div className={`flex flex-col items-center w-full max-w-full mx-auto transition-all duration-500
+    ${gameWon ? 'mt-2 sm:mt-4 md:mt-6' : 'mt-8 sm:mt-12 md:mt-16'}`}
+  >
 
       {/* Logo + título */}
       <img src={logo} alt="Logo Cohorsil"
-        className="h-32 w-56 sm:h-40 sm:w-72 md:h-52 md:w-[22rem] mb-6 object-contain" />
-      <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-800 text-center mb-2">
+        className={`h-32 w-56 sm:h-40 sm:w-72 md:h-52 md:w-[22rem] mb-6 object-contain transition-all duration-500 ${gameWon ? 'mt-0' : ''}`} />
+      <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-800 text-center mb-2 transition-all duration-500">
         Memoria COHORSIL
       </h1>
       <p className="text-gray-600 italic text-center mt-1 text-lg sm:text-2xl md:text-3xl mb-4">
@@ -162,20 +162,19 @@ return (
           aspectRatio: '1/1',
         }}
       >
-  <div className="grid grid-cols-4 gap-2 sm:gap-3 md:gap-4 w-full h-full">
+  <div className="grid grid-cols-4 gap-0.5 w-full h-full">
           {cards.map(card => {
             const isFlipped = flippedCards.includes(card.id) || matchedCards.includes(card.id);
             const isMatched = matchedCards.includes(card.id);
 
             const pairColors = [
               'from-blue-400 to-blue-500',
-              'from-green-600 to-green-600',
               'from-yellow-400 to-yellow-500',
               'from-pink-400 to-pink-500',
               'from-purple-400 to-purple-500',
               'from-orange-400 to-orange-500',
               'from-teal-400 to-teal-500',
-              'from-cyan-400 to-cyan-500',
+            
             ];
             let matchedPairColor = '';
             if (isMatched) {
@@ -206,12 +205,17 @@ return (
                     </span>
                   ) : (
                     card.image ? (
-                      <img
-                        src={require(`../Assets/${card.image}`)}
-                        alt={card.text}
-                        className="w-[98%] h-[98%] object-cover mx-auto block rounded-lg"
-                        style={{display:'block', margin:'0 auto'}}
-                      />
+                      <div className="flex flex-col items-center w-full h-full justify-center">
+                        <img
+                          src={require(`../Assets/${card.image}`)}
+                          alt={card.text}
+                          className="w-[98%] h-[80%] object-cover mx-auto block rounded-lg"
+                          style={{display:'block', margin:'0 auto'}}
+                        />
+                        <span className="block mt-1 text-xs sm:text-sm font-semibold text-white drop-shadow-md text-center w-full truncate" style={{lineHeight:'1.1'}}>
+                          {card.text}
+                        </span>
+                      </div>
                     ) : (
                       <span className="text-base sm:text-xl md:text-2xl font-bold">{card.text}</span>
                     )
