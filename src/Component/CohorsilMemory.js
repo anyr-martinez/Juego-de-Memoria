@@ -157,9 +157,9 @@ return (
 
       {/* Tablero */}
       <div
-        className="bg-white rounded-lg shadow-inner p-4 sm:p-6 flex items-center justify-center mx-auto mt-8 mb-8 w-full max-w-[98vw] sm:max-w-[800px] lg:max-w-[1100px]"
+        className="bg-white rounded-lg shadow-inner p-4 sm:p-6 flex items-center justify-center mx-auto mt-8 mb-8 w-full max-w-[98vw] sm:max-w-[800px] lg:max-w-[1000px]"
         style={{
-          height: 'min(98vw, 95vh, 800px)',
+          height: 'min(98vw, 85vh, 700px)',
           aspectRatio: '1/1',
         }}
       >
