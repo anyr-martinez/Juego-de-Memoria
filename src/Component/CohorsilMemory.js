@@ -107,9 +107,13 @@ const MemoryGame = () => {
 
   // Comprobar victoria
   useEffect(() => {
+    let winTimeout;
     if (matchedCards.length === cards.length && cards.length > 0) {
-      setTimeout(() => setGameWon(true), 800);
+      winTimeout = setTimeout(() => setGameWon(true), 800);
     }
+    return () => {
+      if (winTimeout) clearTimeout(winTimeout);
+    };
   }, [matchedCards, cards]);
 
   useEffect(() => {
