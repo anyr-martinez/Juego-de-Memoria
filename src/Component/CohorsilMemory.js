@@ -159,7 +159,7 @@ return (
       <div
         className="bg-white rounded-lg shadow-inner p-4 sm:p-6 flex items-center justify-center mx-auto mt-8 mb-8 w-full max-w-[98vw] sm:max-w-[800px] lg:max-w-[1100px]"
         style={{
-          height: 'min(98vw, 85vh, 900px)',
+          height: 'min(98vw, 95vh, 800px)',
           aspectRatio: '1/1',
         }}
       >
@@ -197,7 +197,7 @@ return (
                     : 'bg-gradient-to-br from-red-400 to-red-500 hover:from-red-500 hover:to-red-600 text-white'}
                   ${isMatched ? 'ring-4 ring-blue-300 ring-opacity-50' : ''}
                 `}
-                style={{ pointerEvents: gamePaused || gameWon ? 'none' : 'auto', minWidth: '150px', minHeight: '110px', wordBreak: 'break-word', overflowWrap: 'break-word', hyphens: 'auto', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0 }}
+                style={{ pointerEvents: gamePaused || gameWon ? 'none' : 'auto', minWidth: '80px', minHeight: '60px', wordBreak: 'break-word', overflowWrap: 'break-word', hyphens: 'auto', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0 }}
               >
                 {isFlipped ? (
                   card.isQuestion ? (
