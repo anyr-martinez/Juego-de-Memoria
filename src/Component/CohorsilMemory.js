@@ -8,7 +8,7 @@ const MemoryGame = () => {
     { question: 'Royal', answer: 'Esfera Max', image: 'esfera.png' },
     { question: 'Tizón Tardío', answer: 'Orondis', image: 'orondis.png' },
     { question: 'Nematodos', answer: 'Verango', image: 'verango.png' },
-    { question: 'Deficiencia de Calcio', answer: 'Metalosote Calcio', image: 'metalosote.png' },
+    { question: 'Deficiencia de Calcio', answer: 'Metalosote Calcio', image: 'metalosate.png' },
     { question: 'Botrytis', answer: 'Miravis', image: 'miravis.png' },
     { question: 'Control del Estrés de la Planta', answer: 'Everest', image: 'everest.png' },
     { question: 'Mosca Blanca', answer: 'Pecuseta', image: 'pecuseta.png' },
