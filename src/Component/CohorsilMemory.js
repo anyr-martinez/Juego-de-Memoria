@@ -24,6 +24,16 @@ const MemoryGame = () => {
   const [startTime, setStartTime] = useState(null);
   const [elapsedTime, setElapsedTime] = useState(0);
 
+  // Precargar imágenes para optimizar la carga visual
+  useEffect(() => {
+    qaPairs.forEach(pair => {
+      if (pair.image) {
+        const img = new window.Image();
+        img.src = require(`../Assets/${pair.image}`);
+      }
+    });
+  }, [qaPairs]);
+
   // Genera cartas
   const createCards = useCallback(() => {
     let gameCards = [];
