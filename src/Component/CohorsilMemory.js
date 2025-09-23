@@ -128,14 +128,16 @@ return (
     min-h-screen w-full flex items-center justify-center
     bg-gradient-to-br to-red-50 p-2 sm:p-4 overflow-x-hidden
   ">
-  <div className={`flex flex-col items-center w-full max-w-full mx-auto transition-all duration-500
-    ${gameWon ? 'mt-2 sm:mt-4 md:mt-6' : 'mt-8 sm:mt-12 md:mt-16'}`}
+  <div
+    className={`flex flex-col items-center w-full max-w-full mx-auto transition-all duration-500
+      ${gameWon ? 'mt-2 sm:mt-2 md:mt-2' : 'mt-8 sm:mt-12 md:mt-16'}`}
+    style={gameWon ? { maxHeight: '92vh', overflow: 'hidden' } : {}}
   >
 
       {/* Logo + título */}
       <img src={logo} alt="Logo Cohorsil"
-        className={`h-32 w-56 sm:h-40 sm:w-72 md:h-52 md:w-[22rem] mb-6 object-contain transition-all duration-500 ${gameWon ? 'mt-0' : ''}`} />
-      <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-800 text-center mb-2 transition-all duration-500">
+        className={`h-28 w-48 sm:h-32 sm:w-60 md:h-40 md:w-[18rem] mb-4 object-contain transition-all duration-500 ${gameWon ? 'mt-0' : ''}`} />
+      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 text-center mb-1 transition-all duration-500">
         Memoria COHORSIL
       </h1>
       <p className="text-gray-600 italic text-center mt-1 text-lg sm:text-2xl md:text-3xl mb-4">
@@ -145,7 +147,7 @@ return (
       {/* Mensaje victoria */}
       {gameWon && (
         <div className="mt-4 w-full flex justify-center">
-          <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-4 sm:p-6 rounded-lg text-center shadow-lg animate-pulse w-full max-w-xs">
+          <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-4 sm:p-6 rounded-lg text-center shadow-lg animate-pulse w-full max-w-md">
             <h2 className="text-2xl sm:text-3xl font-bold mb-2">🎉 ¡Felicitaciones! 🎉</h2>
             <p className="text-lg sm:text-xl mb-2">¡Has completado el juego de memoria COHORSIL!</p>
             <p className="text-base sm:text-lg">Movimientos: {moves} | Tiempo: {formatTime(elapsedTime)}</p>
@@ -162,7 +164,7 @@ return (
           aspectRatio: '1/1',
         }}
       >
-  <div className="grid grid-cols-4 gap-0.5 w-full h-full">
+  <div className="grid grid-cols-4 gap-8 w-full h-full items-center justify-center">
           {cards.map(card => {
             const isFlipped = flippedCards.includes(card.id) || matchedCards.includes(card.id);
             const isMatched = matchedCards.includes(card.id);
@@ -187,8 +189,7 @@ return (
                 onClick={() => handleCardClick(card.id)}
                 className={`
                   aspect-square rounded-lg cursor-pointer transition-all duration-500 flex items-center justify-center
-                  text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold shadow p-2 sm:p-4
-                  whitespace-pre-line break-words text-center
+                  text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold shadow whitespace-pre-line break-words text-center
                   ${isFlipped
                     ? isMatched
                       ? `bg-gradient-to-br ${matchedPairColor} text-white`
@@ -196,7 +197,7 @@ return (
                     : 'bg-gradient-to-br from-red-400 to-red-500 hover:from-red-500 hover:to-red-600 text-white'}
                   ${isMatched ? 'ring-4 ring-blue-300 ring-opacity-50' : ''}
                 `}
-                style={{ pointerEvents: gamePaused || gameWon ? 'none' : 'auto', minWidth: '200px', minHeight: '170px', wordBreak: 'break-word', overflowWrap: 'break-word', hyphens: 'auto', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                style={{ pointerEvents: gamePaused || gameWon ? 'none' : 'auto', minWidth: '200px', minHeight: '190px', wordBreak: 'break-word', overflowWrap: 'break-word', hyphens: 'auto', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0 }}
               >
                 {isFlipped ? (
                   card.isQuestion ? (
