@@ -163,7 +163,7 @@ return (
           aspectRatio: '1/1',
         }}
       >
- <div className="grid grid-cols-4 gap-x-8 gap-y-4 w-full h-full justify-items-center mx-auto">
+<div className="grid grid-cols-4 gap-4 w-full h-full justify-items-center mx-auto">
 
           {cards.map(card => {
             const isFlipped = flippedCards.includes(card.id) || matchedCards.includes(card.id);
