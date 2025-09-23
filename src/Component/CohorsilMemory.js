@@ -8,7 +8,7 @@ const MemoryGame = () => {
     { question: 'Roya', answer: 'Esfera Max', image: 'esfera.png' },
     { question: 'Broca', answer: 'Incipio', image: 'incipio.png' },
     { question: 'Enmienda Agricola', answer: 'Nutrical', image: 'nutrical.png' },
-    { question: 'Deficiencia de Calcio', answer: 'Metalosote Calcio', image: 'metalosate.png' },
+    { question: 'Deficiencia de Calcio', answer: 'Metalosate Calcio', image: 'metalosate.png' },
     { question: 'Plagas del Suelo', answer: 'Verdadero', image: 'verdadero.png' },
     { question: 'Estimulación de Floración', answer: 'Foliveex Zinc-Boro', image: 'foliveex.png' },
   ], []);
