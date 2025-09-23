@@ -199,7 +199,7 @@ return (
                 `}
                 style={{
                   pointerEvents: gamePaused || gameWon ? 'none' : 'auto',
-                  width: '190px',
+                  width: '180px',
                   height: '190px',
                   wordBreak: 'break-word',
                   overflowWrap: 'break-word',
@@ -243,7 +243,7 @@ return (
       </div>
 
       {/* Botón */}
-      <div className="flex flex-col items-center w-full max-w-xs mx-auto mb-8">
+  <div className="flex flex-col items-center w-full max-w-xs mx-auto mt-20 mb-20">
         <button
           onClick={initGame}
           className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 
