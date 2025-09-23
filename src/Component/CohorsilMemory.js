@@ -197,7 +197,19 @@ return (
                     : 'bg-gradient-to-br from-red-400 to-red-500 hover:from-red-500 hover:to-red-600 text-white'}
                   ${isMatched ? 'ring-4 ring-blue-300 ring-opacity-50' : ''}
                 `}
-                style={{ pointerEvents: gamePaused || gameWon ? 'none' : 'auto', maxWidth: '210px', maxHeight: '200px', minWidth: "90px", minHeight: '90px', wordBreak: 'break-word', overflowWrap: 'break-word', hyphens: 'auto', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0 }}
+                style={{
+                  pointerEvents: gamePaused || gameWon ? 'none' : 'auto',
+                  width: '200px',
+                  height: '190px',
+                  wordBreak: 'break-word',
+                  overflowWrap: 'break-word',
+                  hyphens: 'auto',
+                  textAlign: 'center',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: 0
+                }}
               >
                 {isFlipped ? (
                   card.isQuestion ? (
