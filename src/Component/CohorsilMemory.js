@@ -130,7 +130,7 @@ return (
   ">
   <div
     className={`flex flex-col items-center w-full max-w-full mx-auto transition-all duration-500
-      ${gameWon ? '-mt-4 sm:-mt-6 md:-mt-8' : 'mt-0 sm:mt-1 md:mt-2'}`}
+      ${gameWon ? 'mt-8' : 'mt-0 sm:mt-1 md:mt-2'}`}
     style={gameWon ? { maxHeight: '88vh', overflow: 'hidden' } : {}}
   >
 
