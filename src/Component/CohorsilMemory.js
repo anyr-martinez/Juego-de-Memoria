@@ -9,8 +9,8 @@ const MemoryGame = () => {
     { question: 'Broca', answer: 'Incipio', image: 'incipio.png' },
     { question: 'Enmienda Agricola', answer: 'Nutrical', image: 'nutrical.png' },
     { question: 'Deficiencia de Calcio', answer: 'Metalosote Calcio', image: 'metalosate.png' },
-    { question: 'Atracnosis', answer: 'Amistar Extra', image: 'amistar.png' },
-    { question: 'Acidez del Suelo', answer: 'Acical', image: 'acical.png' },
+    { question: 'Plagas del Suelo', answer: 'Verdadero', image: 'verdadero.png' },
+    { question: 'Estimulación de Floración', answer: 'Foliveex Zinc-Boro', image: 'foliveex.png' },
   ], []);
 
   const [cards, setCards] = useState([]);
@@ -197,7 +197,7 @@ return (
                     : 'bg-gradient-to-br from-red-400 to-red-500 hover:from-red-500 hover:to-red-600 text-white'}
                   ${isMatched ? 'ring-4 ring-blue-300 ring-opacity-50' : ''}
                 `}
-                style={{ pointerEvents: gamePaused || gameWon ? 'none' : 'auto', minWidth: '200px', minHeight: '150px', wordBreak: 'break-word', overflowWrap: 'break-word', hyphens: 'auto', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0 }}
+                style={{ pointerEvents: gamePaused || gameWon ? 'none' : 'auto', minWidth: '150px', minHeight: '110px', wordBreak: 'break-word', overflowWrap: 'break-word', hyphens: 'auto', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0 }}
               >
                 {isFlipped ? (
                   card.isQuestion ? (
