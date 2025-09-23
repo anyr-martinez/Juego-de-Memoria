@@ -199,7 +199,7 @@ return (
                 `}
                 style={{
                   pointerEvents: gamePaused || gameWon ? 'none' : 'auto',
-                  width: '200px',
+                  width: '190px',
                   height: '190px',
                   wordBreak: 'break-word',
                   overflowWrap: 'break-word',
