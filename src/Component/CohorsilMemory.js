@@ -130,7 +130,7 @@ return (
   ">
   <div
     className={`flex flex-col items-center w-full max-w-full mx-auto transition-all duration-500
-      ${gameWon ? 'mt-2 sm:mt-2 md:mt-2' : 'mt-8 sm:mt-12 md:mt-16'}`}
+      ${gameWon ? '-mt-4 sm:-mt-6 md:-mt-8' : 'mt-0 sm:mt-1 md:mt-2'}`}
     style={gameWon ? { maxHeight: '92vh', overflow: 'hidden' } : {}}
   >
 
@@ -157,14 +157,14 @@ return (
 
       {/* Tablero */}
       <div
-        className="bg-white rounded-lg shadow-inner p-4 sm:p-6 flex items-center justify-center mx-auto mt-8 mb-8
-                   w-full max-w-[98vw] sm:max-w-[800px] lg:max-w-[1100px]"
+        className="bg-white rounded-lg shadow-inner p-4 sm:p-6 flex items-center justify-center mx-auto mt-8 mb-8 w-full max-w-[98vw] sm:max-w-[800px] lg:max-w-[1100px]"
         style={{
           height: 'min(98vw, 85vh, 900px)',
           aspectRatio: '1/1',
         }}
       >
-  <div className="grid grid-cols-4 gap-8 w-full h-full items-center justify-center">
+ <div className="grid grid-cols-4 gap-x-8 gap-y-4 w-full h-full justify-items-center mx-auto">
+
           {cards.map(card => {
             const isFlipped = flippedCards.includes(card.id) || matchedCards.includes(card.id);
             const isMatched = matchedCards.includes(card.id);
@@ -197,7 +197,7 @@ return (
                     : 'bg-gradient-to-br from-red-400 to-red-500 hover:from-red-500 hover:to-red-600 text-white'}
                   ${isMatched ? 'ring-4 ring-blue-300 ring-opacity-50' : ''}
                 `}
-                style={{ pointerEvents: gamePaused || gameWon ? 'none' : 'auto', minWidth: '200px', minHeight: '190px', wordBreak: 'break-word', overflowWrap: 'break-word', hyphens: 'auto', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0 }}
+                style={{ pointerEvents: gamePaused || gameWon ? 'none' : 'auto', minWidth: '200px', minHeight: '150px', wordBreak: 'break-word', overflowWrap: 'break-word', hyphens: 'auto', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0 }}
               >
                 {isFlipped ? (
                   card.isQuestion ? (
