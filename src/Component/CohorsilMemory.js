@@ -131,7 +131,7 @@ return (
   <div
     className={`flex flex-col items-center w-full max-w-full mx-auto transition-all duration-500
       ${gameWon ? '-mt-4 sm:-mt-6 md:-mt-8' : 'mt-0 sm:mt-1 md:mt-2'}`}
-    style={gameWon ? { maxHeight: '92vh', overflow: 'hidden' } : {}}
+    style={gameWon ? { maxHeight: '88vh', overflow: 'hidden' } : {}}
   >
 
       {/* Logo + título */}
@@ -157,13 +157,13 @@ return (
 
       {/* Tablero */}
       <div
-        className="bg-white rounded-lg shadow-inner p-4 sm:p-6 flex items-center justify-center mx-auto mt-8 mb-8 w-full max-w-[90vw] sm:max-w-[800px] lg:max-w-[1000px]"
+        className="bg-white rounded-lg shadow-inner p-4 sm:p-6 flex items-center justify-center mx-auto mt-8 mb-8 w-full max-w-[95vw] sm:max-w-[800px] lg:max-w-[1000px]"
         style={{
-          height: 'min(88vw, 80vh, 600px)',
+          height: 'min(92vw, 86vh, 660px)',
           aspectRatio: '1/1',
         }}
       >
-<div className="grid grid-cols-4 gap-4 w-full h-full justify-items-center mx-auto">
+        <div className="grid grid-cols-4 gap-4 w-full h-full justify-items-center mx-auto">
 
           {cards.map(card => {
             const isFlipped = flippedCards.includes(card.id) || matchedCards.includes(card.id);
