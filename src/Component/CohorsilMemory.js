@@ -198,7 +198,7 @@ const MemoryGame = () => {
 
   // PALETA DE COLORES DIFERENCIADA, NO MUY OSCURA NI MUY CLARA
   const pairColors = [
-    'from-blue-500 to-blue-700',
+    'from-blue-700 to-blue-900',
     'from-cyan-500 to-cyan-700',
     'from-orange-500 to-orange-700',
     'from-purple-500 to-purple-700',
@@ -228,7 +228,7 @@ const MemoryGame = () => {
           <img
             src={bayerLogo}
             alt="Logo Bayer"
-            className="h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 object-contain transition-all duration-500"
+           className="h-40 w-40 sm:h-50 sm:w-50 md:h-48 md:w-48 object-contain transition-all duration-500" 
           />
         </div>
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 text-center mb-1 transition-all duration-500">
