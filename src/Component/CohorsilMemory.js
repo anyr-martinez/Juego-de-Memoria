@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import logo from "../Assets/logo2.png";
+import bayerLogo from "../Assets/BAYER.png"; // Importa el logo de Bayer
 
 const MemoryGame = () => {
   // Preguntas y respuestas
@@ -140,16 +141,24 @@ const MemoryGame = () => {
     };
   }, []);
 
-  // Limpia flippedCards cuando se acaba el tiempo
+  // Limpia flippedCards y timeout cuando se acaba el tiempo
   useEffect(() => {
     if (timeUp) {
+      if (flipTimeout.current) {
+        clearTimeout(flipTimeout.current);
+        flipTimeout.current = null;
+      }
       setFlippedCards([]);
     }
   }, [timeUp]);
 
-  // Limpia flippedCards cuando se gana el juego
+  // Limpia flippedCards y timeout cuando se gana el juego
   useEffect(() => {
     if (gameWon) {
+      if (flipTimeout.current) {
+        clearTimeout(flipTimeout.current);
+        flipTimeout.current = null;
+      }
       setFlippedCards([]);
     }
   }, [gameWon]);
@@ -187,6 +196,16 @@ const MemoryGame = () => {
     return `${mins.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')}`;
   };
 
+  // PALETA DE COLORES DIFERENCIADA, NO MUY OSCURA NI MUY CLARA
+  const pairColors = [
+    'from-blue-500 to-blue-700',
+    'from-cyan-500 to-cyan-700',
+    'from-orange-500 to-orange-700',
+    'from-purple-500 to-purple-700',
+    'from-teal-500 to-teal-700',
+    'from-indigo-500 to-indigo-700',
+  ];
+
   return (
     <div className="
       memory-container
@@ -199,9 +218,19 @@ const MemoryGame = () => {
         style={gameWon ? { maxHeight: '88vh', overflow: 'hidden' } : {}}
       >
 
-        {/* Logo + título */}
-        <img src={logo} alt="Logo Cohorsil"
-          className={`h-28 w-48 sm:h-32 sm:w-60 md:h-40 md:w-[18rem] mb-4 object-contain transition-all duration-500 ${gameWon ? 'mt-0' : ''}`} />
+        {/* Logos + título */}
+        <div className="flex items-center gap-4 mb-4">
+          <img
+            src={logo}
+            alt="Logo Cohorsil"
+            className="h-28 w-48 sm:h-32 sm:w-60 md:h-40 md:w-[18rem] object-contain transition-all duration-500"
+          />
+          <img
+            src={bayerLogo}
+            alt="Logo Bayer"
+            className="h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 object-contain transition-all duration-500"
+          />
+        </div>
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 text-center mb-1 transition-all duration-500">
           Memoria COHORSIL
         </h1>
@@ -249,14 +278,6 @@ const MemoryGame = () => {
               const isFlipped = flippedCards.includes(card.id) || matchedCards.includes(card.id);
               const isMatched = matchedCards.includes(card.id);
 
-              const pairColors = [
-                'from-blue-300 to-blue-400',
-                'from-cyan-200 to-cyan-400',
-                'from-orange-200 to-orange-400',
-                'from-purple-200 to-purple-400',
-                'from-teal-200 to-teal-400',
-                'from-indigo-200 to-indigo-400',
-              ];
               let matchedPairColor = '';
               if (isMatched) {
                 matchedPairColor = pairColors[card.pairId % pairColors.length];
@@ -271,9 +292,9 @@ const MemoryGame = () => {
                     text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold shadow whitespace-pre-line break-words text-center
                     ${isFlipped
                       ? isMatched
-                        ? `bg-gradient-to-br ${matchedPairColor} text-black`
-                        : 'bg-gradient-to-br from-green-400 to-green-500 text-black'
-                      : 'bg-gradient-to-br from-red-400 to-red-500 hover:from-red-500 hover:to-red-600 text-black'}
+                        ? `bg-gradient-to-br ${matchedPairColor} text-white`
+                        : 'bg-gradient-to-br from-green-600 to-green-800 text-white'
+                      : 'bg-gradient-to-br from-red-400 to-red-500 hover:from-red-500 hover:to-red-600 text-white'}
                     ${isMatched ? 'ring-4 ring-blue-300 ring-opacity-50' : ''}
                     ${timeUp && !isMatched ? 'opacity-50 pointer-events-none' : ''}
                   `}
@@ -293,7 +314,7 @@ const MemoryGame = () => {
                 >
                   {isFlipped ? (
                     card.isQuestion ? (
-                      <span className="block w-full px-2 py-2 text-base sm:text-xl md:text-2xl font-bold text-center leading-tight break-words whitespace-pre-line text-black" style={{wordBreak:'break-word', overflowWrap:'break-word', hyphens:'auto'}}>
+                      <span className="block w-full px-2 py-2 text-base sm:text-xl md:text-2xl font-bold text-center leading-tight break-words whitespace-pre-line text-white" style={{wordBreak:'break-word', overflowWrap:'break-word', hyphens:'auto'}}>
                         {card.text}
                       </span>
                     ) : (
@@ -306,7 +327,7 @@ const MemoryGame = () => {
                             style={{display:'block', margin:'0 auto'}}
                           />
                           <span
-                            className="block mt-1 text-xs sm:text-sm font-semibold text-black drop-shadow-md text-center w-full whitespace-normal break-words"
+                            className="block mt-1 text-xs sm:text-sm font-semibold text-white drop-shadow-md text-center w-full whitespace-normal break-words"
                             style={{
                               lineHeight: '1.1',
                               maxWidth: '95%',
@@ -320,7 +341,7 @@ const MemoryGame = () => {
                           </span>
                         </div>
                       ) : (
-                        <span className="text-base sm:text-xl md:text-2xl font-bold text-black">{card.text}</span>
+                        <span className="text-base sm:text-xl md:text-2xl font-bold text-white">{card.text}</span>
                       )
                     )
                   ) : (
