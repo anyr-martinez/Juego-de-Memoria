@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import logo from "../Assets/logo2.png";
 
 const MemoryGame = () => {
-
   // Preguntas y respuestas
   const qaPairs = React.useMemo(() => [
     { question: 'Roya y Ojo de Gallo', answer: 'Esfera Max', image: 'esferamax.png' },
@@ -21,8 +20,13 @@ const MemoryGame = () => {
   const [gamePaused, setGamePaused] = useState(false);
   const [startTime, setStartTime] = useState(null);
   const [elapsedTime, setElapsedTime] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(120);
+  const [timeLeft, setTimeLeft] = useState(60);
   const [timeUp, setTimeUp] = useState(false);
+
+  // Ref para limpiar timeouts de flip
+  const flipTimeout = useRef(null);
+  // Ref para saber si el juego está activo
+  const gameActive = useRef(true);
 
   // Precargar imágenes para optimizar la carga visual
   useEffect(() => {
@@ -58,6 +62,11 @@ const MemoryGame = () => {
 
   // Inicializar juego
   const initGame = useCallback(() => {
+    gameActive.current = false; // Desactiva el juego anterior
+    if (flipTimeout.current) {
+      clearTimeout(flipTimeout.current);
+      flipTimeout.current = null;
+    }
     const newCards = createCards();
     setCards(newCards);
     setFlippedCards([]);
@@ -67,8 +76,9 @@ const MemoryGame = () => {
     setGamePaused(false);
     setStartTime(null);
     setElapsedTime(0);
-    setTimeLeft(120);    // Reinicia el cronómetro
-    setTimeUp(false);    // Reinicia el estado de tiempo agotado
+    setTimeLeft(60);
+    setTimeUp(false);
+    setTimeout(() => { gameActive.current = true; }, 0); // Activa el nuevo juego después de reiniciar el estado
   }, [createCards]);
 
   // Temporizador de cuenta regresiva
@@ -92,6 +102,7 @@ const MemoryGame = () => {
 
   // Click en carta
   const handleCardClick = (cardId) => {
+    if (!gameActive.current) return;
     if (flippedCards.length === 2 || flippedCards.includes(cardId) || matchedCards.includes(cardId) || gamePaused || gameWon || timeUp) return;
 
     if (flippedCards.length === 0 && startTime === null) {
@@ -107,15 +118,41 @@ const MemoryGame = () => {
       const card2 = cards.find(c => c.id === newFlipped[1]);
 
       if (card1.pairId === card2.pairId && card1.isQuestion !== card2.isQuestion) {
-        setTimeout(() => {
+        flipTimeout.current = setTimeout(() => {
+          if (!gameActive.current) return;
           setMatchedCards(prev => [...prev, card1.id, card2.id]);
           setFlippedCards([]);
         }, 600);
       } else {
-        setTimeout(() => setFlippedCards([]), 800);
+        flipTimeout.current = setTimeout(() => {
+          if (!gameActive.current) return;
+          setFlippedCards([]);
+        }, 800);
       }
     }
   };
+
+  // Limpia timeout al desmontar el componente
+  useEffect(() => {
+    return () => {
+      gameActive.current = false;
+      if (flipTimeout.current) clearTimeout(flipTimeout.current);
+    };
+  }, []);
+
+  // Limpia flippedCards cuando se acaba el tiempo
+  useEffect(() => {
+    if (timeUp) {
+      setFlippedCards([]);
+    }
+  }, [timeUp]);
+
+  // Limpia flippedCards cuando se gana el juego
+  useEffect(() => {
+    if (gameWon) {
+      setFlippedCards([]);
+    }
+  }, [gameWon]);
 
   // Temporizador para mostrar el tiempo transcurrido (opcional, puedes quitarlo si solo quieres el countdown)
   useEffect(() => {
@@ -213,12 +250,12 @@ const MemoryGame = () => {
               const isMatched = matchedCards.includes(card.id);
 
               const pairColors = [
-                'from-blue-400 to-blue-500',
-                'from-yellow-400 to-yellow-500',
-                'from-pink-400 to-pink-500',
-                'from-purple-400 to-purple-500',
-                'from-orange-400 to-orange-500',
-                'from-teal-400 to-teal-500',
+                'from-blue-300 to-blue-400',
+                'from-cyan-200 to-cyan-400',
+                'from-orange-200 to-orange-400',
+                'from-purple-200 to-purple-400',
+                'from-teal-200 to-teal-400',
+                'from-indigo-200 to-indigo-400',
               ];
               let matchedPairColor = '';
               if (isMatched) {
@@ -234,9 +271,9 @@ const MemoryGame = () => {
                     text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold shadow whitespace-pre-line break-words text-center
                     ${isFlipped
                       ? isMatched
-                        ? `bg-gradient-to-br ${matchedPairColor} text-white`
-                        : 'bg-gradient-to-br from-green-400 to-green-500 text-white'
-                      : 'bg-gradient-to-br from-red-400 to-red-500 hover:from-red-500 hover:to-red-600 text-white'}
+                        ? `bg-gradient-to-br ${matchedPairColor} text-black`
+                        : 'bg-gradient-to-br from-green-400 to-green-500 text-black'
+                      : 'bg-gradient-to-br from-red-400 to-red-500 hover:from-red-500 hover:to-red-600 text-black'}
                     ${isMatched ? 'ring-4 ring-blue-300 ring-opacity-50' : ''}
                     ${timeUp && !isMatched ? 'opacity-50 pointer-events-none' : ''}
                   `}
@@ -256,7 +293,7 @@ const MemoryGame = () => {
                 >
                   {isFlipped ? (
                     card.isQuestion ? (
-                      <span className="block w-full px-2 py-2 text-base sm:text-xl md:text-2xl font-bold text-center leading-tight break-words whitespace-pre-line" style={{wordBreak:'break-word', overflowWrap:'break-word', hyphens:'auto'}}>
+                      <span className="block w-full px-2 py-2 text-base sm:text-xl md:text-2xl font-bold text-center leading-tight break-words whitespace-pre-line text-black" style={{wordBreak:'break-word', overflowWrap:'break-word', hyphens:'auto'}}>
                         {card.text}
                       </span>
                     ) : (
@@ -269,7 +306,7 @@ const MemoryGame = () => {
                             style={{display:'block', margin:'0 auto'}}
                           />
                           <span
-                            className="block mt-1 text-xs sm:text-sm font-semibold text-white drop-shadow-md text-center w-full whitespace-normal break-words"
+                            className="block mt-1 text-xs sm:text-sm font-semibold text-black drop-shadow-md text-center w-full whitespace-normal break-words"
                             style={{
                               lineHeight: '1.1',
                               maxWidth: '95%',
@@ -283,7 +320,7 @@ const MemoryGame = () => {
                           </span>
                         </div>
                       ) : (
-                        <span className="text-base sm:text-xl md:text-2xl font-bold">{card.text}</span>
+                        <span className="text-base sm:text-xl md:text-2xl font-bold text-black">{card.text}</span>
                       )
                     )
                   ) : (
