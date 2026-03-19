@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import logo from "../Assets/logo2.png";
+import cohorsil from "../Assets/cohorsil.png";
 import bayerLogo from "../Assets/BAYER.png"; // Importa el logo de Bayer
+import syngenta from "../Assets/syngenta.png"; // Importa el logo de Syngenta
 
 const MemoryGame = () => {
   // Preguntas y respuestas
@@ -11,6 +12,13 @@ const MemoryGame = () => {
     { question: 'Complemento Nutricional de Microelementos', answer: 'Bayfolan Forte', image: 'bayfolan.png' },
     { question: 'Plagas del Suelo(Gallina Ciega, Cochinilla)', answer: 'Confidor', image: 'confidor.png' },
     { question: 'Nematodos', answer: 'Verango', image: 'verango.png' },
+    { question: 'Protección total desde la raíz', answer: 'Uniform', image: 'uniform.png' },
+    { question: 'elimina larvas antes de eclosionar', answer:'Proclaim Opti', image: 'proclaim-opti.png' },
+    { question: 'ácaros y minadores', answer: 'Vertimec', image: 'vertimec.png' },
+    { question: 'oomicetos', answer: 'Orondis Ultra', image: 'orondis.png' },
+    { question: 'Gusano Cogollero', answer: 'Ampligo 15 sc', image: 'ampligo.png'},
+    { question: 'Control de Botritys', answer: 'Inspire Gold', image: 'inspire-gold.png' }, 
+    { question: 'Insectos en el enves de las hojas', answer: 'Pegasus 50', image: 'pegasus.png' },
   ], []);
 
   const [cards, setCards] = useState([]);
@@ -41,25 +49,34 @@ const MemoryGame = () => {
 
   // Genera cartas
   const createCards = useCallback(() => {
-    let gameCards = [];
-    qaPairs.forEach((pair, idx) => {
-      gameCards.push({
-        id: idx * 2,
-        text: pair.question,
-        pairId: idx,
-        isQuestion: true,
-        image: null,
-      });
-      gameCards.push({
-        id: idx * 2 + 1,
-        text: pair.answer,
-        pairId: idx,
-        isQuestion: false,
-        image: pair.image,
-      });
+  // 1. Tomar 6 productos aleatorios del banco
+  const selectedPairs = [...qaPairs]
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 6);
+
+  // 2. Crear las cartas solo con esos 6
+  let gameCards = [];
+  selectedPairs.forEach((pair, idx) => {
+    gameCards.push({
+      id: idx * 2,
+      text: pair.question,
+      pairId: idx,
+      isQuestion: true,
+      image: null,
     });
-    return gameCards.sort(() => Math.random() - 0.5);
-  }, [qaPairs]);
+
+    gameCards.push({
+      id: idx * 2 + 1,
+      text: pair.answer,
+      pairId: idx,
+      isQuestion: false,
+      image: pair.image,
+    });
+  });
+
+  // 3. Mezclar las cartas en el tablero
+  return gameCards.sort(() => Math.random() - 0.5);
+}, [qaPairs]);
 
   // Inicializar juego
   const initGame = useCallback(() => {
@@ -209,28 +226,42 @@ const MemoryGame = () => {
   return (
     <div className="
       memory-container
-      min-h-screen w-full flex items-center justify-center
-      bg-gradient-to-br to-red-50 p-2 sm:p-4 overflow-x-hidden
+      min-h-screen w-full flex items-start justify-center
+      bg-gradient-to-br to-red-50 p-2 sm:p-4 md:py-8 overflow-x-hidden
     ">
       <div
-        className={`flex flex-col items-center w-full max-w-full mx-auto transition-all duration-500
+        className={`flex flex-col items-center w-full max-w-[95vw] sm:max-w-[800px] lg:max-w-[1000px] mx-auto rounded-[2rem] bg-white/95 px-3 py-4 sm:px-5 sm:py-6 md:px-6 shadow-2xl ring-1 ring-red-100 transition-all duration-500
           ${gameWon ? 'mt-8' : 'mt-0 sm:mt-1 md:mt-2'}`}
-        style={gameWon ? { maxHeight: '88vh', overflow: 'hidden' } : {}}
+        style={{ overflow: 'visible' }}
       >
 
         {/* Logos + título */}
-        <div className="flex items-center gap-4 mb-4">
-          <img
-            src={logo}
-            alt="Logo Cohorsil"
-            className="h-28 w-48 sm:h-32 sm:w-60 md:h-40 md:w-[18rem] object-contain transition-all duration-500"
-          />
-          <img
-            src={bayerLogo}
-            alt="Logo Bayer"
-           className="h-40 w-40 sm:h-50 sm:w-50 md:h-48 md:w-48 object-contain transition-all duration-500" 
-          />
-        </div>
+       <div className="w-full grid grid-cols-[0.8fr_1.8fr_0.8fr] items-center gap-3 sm:gap-4 lg:gap-6 mb-4 border-b border-red-100 py-3 px-1 sm:px-2 overflow-hidden">
+            <div className="flex items-center justify-center">
+              <img
+                src={bayerLogo}
+                alt="Bayer"
+                className="w-14 h-10 sm:w-20 sm:h-14 lg:w-24 lg:h-16 object-contain max-w-full"
+                style={{ maxWidth: '100%', maxHeight: '64px' }}
+              />
+            </div>
+            <div className="flex items-center justify-center">
+              <img
+                src={cohorsil}
+                alt="COHORSIL"
+                className="w-[24rem] h-32 sm:w-[31rem] sm:h-40 lg:w-[40rem] lg:h-52 object-contain max-w-full"
+                style={{ maxWidth: '100%', maxHeight: '208px' }}
+              />
+            </div>
+            <div className="flex items-center justify-center">
+              <img
+                src={syngenta}
+                alt="Syngenta"
+                className="w-20 h-10 sm:w-32 sm:h-14 lg:w-36 lg:h-16 object-contain max-w-full"
+                style={{ maxWidth: '100%', maxHeight: '64px' }}
+              />
+            </div>
+          </div>
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 text-center mb-1 transition-all duration-500">
           Memoria COHORSIL
         </h1>
@@ -239,7 +270,7 @@ const MemoryGame = () => {
         </p>
 
         {/* Cronómetro */}
-        <div className="mb-2">
+        <div className="mb-2 rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-red-100">
           <span className={`font-bold text-lg sm:text-2xl ${timeLeft <= 10 ? `text-red-600` : `text-blue-700`}`}>
             Tiempo Restante: {Math.floor(timeLeft / 60).toString().padStart(2, '0')}:{(timeLeft % 60).toString().padStart(2, '0')}
           </span>
@@ -266,13 +297,9 @@ const MemoryGame = () => {
 
         {/* Tablero */}
         <div
-          className="bg-white rounded-lg shadow-inner p-4 sm:p-6 flex items-center justify-center mx-auto mt-8 mb-8 w-full max-w-[95vw] sm:max-w-[800px] lg:max-w-[1000px]"
-          style={{
-            height: 'min(92vw, 86vh, 660px)',
-            aspectRatio: '1/1',
-          }}
+          className="w-full rounded-[1.5rem] bg-white shadow-inner p-2 sm:p-4 md:p-6 flex items-center justify-center mx-auto mt-6 mb-10 ring-1 ring-red-100"
         >
-          <div className="grid grid-cols-4 gap-3 w-full h-full justify-items-center mx-auto">
+          <div className="grid grid-cols-4 gap-1.5 sm:gap-2 md:gap-3 w-full mx-auto">
 
             {cards.map(card => {
               const isFlipped = flippedCards.includes(card.id) || matchedCards.includes(card.id);
@@ -288,8 +315,8 @@ const MemoryGame = () => {
                   key={card.id}
                   onClick={() => !timeUp && handleCardClick(card.id)}
                   className={`
-                    aspect-square rounded-lg cursor-pointer transition-all duration-500 flex items-center justify-center
-                    text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold shadow whitespace-pre-line break-words text-center
+                    w-full aspect-square min-w-0 rounded-lg cursor-pointer transition-all duration-500 flex items-center justify-center
+                    text-xs sm:text-sm md:text-lg lg:text-2xl xl:text-3xl font-bold shadow whitespace-pre-line break-words text-center
                     ${isFlipped
                       ? isMatched
                         ? `bg-gradient-to-br ${matchedPairColor} text-white`
@@ -300,8 +327,6 @@ const MemoryGame = () => {
                   `}
                   style={{
                     pointerEvents: gamePaused || gameWon || timeUp ? 'none' : 'auto',
-                    width: '190px',
-                    height: '190px',
                     wordBreak: 'break-word',
                     overflowWrap: 'break-word',
                     hyphens: 'auto',
@@ -314,20 +339,20 @@ const MemoryGame = () => {
                 >
                   {isFlipped ? (
                     card.isQuestion ? (
-                      <span className="block w-full px-2 py-2 text-base sm:text-xl md:text-2xl font-bold text-center leading-tight break-words whitespace-pre-line text-white" style={{wordBreak:'break-word', overflowWrap:'break-word', hyphens:'auto'}}>
+                      <span className="block w-full px-1 py-1 sm:px-2 sm:py-2 text-[11px] sm:text-sm md:text-lg lg:text-xl font-bold text-center leading-tight break-words whitespace-pre-line text-white" style={{wordBreak:'break-word', overflowWrap:'break-word', hyphens:'auto'}}>
                         {card.text}
                       </span>
                     ) : (
                       card.image ? (
-                        <div className="flex flex-col items-center w-full h-full justify-center">
+                        <div className="flex flex-col items-center w-full h-full justify-center p-1 sm:p-2">
                           <img
                             src={require(`../Assets/${card.image}`)}
                             alt={card.text}
-                            className="w-[90%] h-[68%] object-contain mx-auto block rounded-lg"
+                            className="w-[82%] h-[54%] sm:w-[86%] sm:h-[60%] md:w-[90%] md:h-[68%] object-contain mx-auto block rounded-lg"
                             style={{display:'block', margin:'0 auto'}}
                           />
                           <span
-                            className="block mt-1 text-xs sm:text-sm font-semibold text-white drop-shadow-md text-center w-full whitespace-normal break-words"
+                            className="block mt-1 text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-semibold text-white drop-shadow-md text-center w-full whitespace-normal break-words"
                             style={{
                               lineHeight: '1.1',
                               maxWidth: '95%',
@@ -354,7 +379,7 @@ const MemoryGame = () => {
         </div>
 
         {/* Botón */}
-        <div className="flex flex-col items-center w-full max-w-xs mx-auto mt-20 mb-20">
+        <div className="flex flex-col items-center w-full max-w-xs mx-auto mt-2 mb-6 sm:mb-8">
           <button
             onClick={initGame}
             className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 
