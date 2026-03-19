@@ -230,7 +230,7 @@ const MemoryGame = () => {
       bg-gradient-to-br to-red-50 p-2 sm:p-4 md:py-8 overflow-x-hidden
     ">
       <div
-        className={`flex flex-col items-center w-full max-w-[95vw] sm:max-w-[800px] lg:max-w-[1000px] mx-auto rounded-[2rem] bg-white/95 px-3 py-4 sm:px-5 sm:py-6 md:px-6 shadow-2xl ring-1 ring-red-100 transition-all duration-500
+        className={`flex flex-col items-center w-full max-w-[95vw] sm:max-w-[800px] lg:max-w-[1000px] mx-auto rounded-[2rem] bg-white/95 px-3 py-4 sm:px-5 sm:py-6 md:px-6 shadow-2xl transition-all duration-500
           ${gameWon ? 'mt-8' : 'mt-0 sm:mt-1 md:mt-2'}`}
         style={{ overflow: 'visible' }}
       >
@@ -270,7 +270,7 @@ const MemoryGame = () => {
         </p>
 
         {/* Cronómetro */}
-        <div className="mb-2 rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-red-100">
+        <div className="mb-2 rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-gray-100">
           <span className={`font-bold text-lg sm:text-2xl ${timeLeft <= 10 ? `text-red-600` : `text-blue-700`}`}>
             Tiempo Restante: {Math.floor(timeLeft / 60).toString().padStart(2, '0')}:{(timeLeft % 60).toString().padStart(2, '0')}
           </span>
