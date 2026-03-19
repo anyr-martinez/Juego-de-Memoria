@@ -236,7 +236,7 @@ const MemoryGame = () => {
       >
 
         {/* Logos + título */}
-       <div className="w-full grid grid-cols-[0.8fr_1.8fr_0.8fr] items-center gap-3 sm:gap-4 lg:gap-6 mb-4 border-b border-red-100 py-3 px-1 sm:px-2 overflow-hidden">
+       <div className="w-full grid grid-cols-[0.8fr_1.8fr_0.8fr] items-center gap-3 sm:gap-4 lg:gap-6 mb-8 py-3 px-1 sm:px-2 overflow-hidden">
             <div className="flex items-center justify-center">
               <img
                 src={bayerLogo}
