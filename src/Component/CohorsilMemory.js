@@ -230,10 +230,31 @@ const MemoryGame = () => {
       bg-gradient-to-br to-red-50 p-2 sm:p-4 md:py-8 overflow-x-hidden
     ">
       <div
-        className={`flex flex-col items-center w-full max-w-[95vw] sm:max-w-[800px] lg:max-w-[1000px] mx-auto rounded-[2rem] bg-white/95 px-3 py-4 sm:px-5 sm:py-6 md:px-6 shadow-2xl transition-all duration-500
+        className={`relative flex flex-col items-center w-full max-w-[95vw] sm:max-w-[800px] lg:max-w-[1000px] mx-auto rounded-[2rem] bg-white/95 px-3 py-4 sm:px-5 sm:py-6 md:px-6 shadow-2xl transition-all duration-500
           ${gameWon ? 'mt-8' : 'mt-0 sm:mt-1 md:mt-2'}`}
         style={{ overflow: 'visible' }}
       >
+        {/* Boton de regreso: aqui se ajustan la URL, la posicion inferior izquierda y el tamano responsivo */}
+        <a
+          href="https://juegos-cohorsil-libreria.vercel.app/"
+          aria-label="Volver a la libreria de juegos Cohorsil"
+          className="absolute bottom-5 left-4 sm:bottom-8 sm:left-6 md:bottom-12 md:left-8 z-20 flex h-14 w-14 sm:h-16 sm:w-16 md:h-20 md:w-20 lg:h-24 lg:w-24 items-center justify-center rounded-full bg-gray-200 text-gray-700 transition hover:-translate-x-1 hover:bg-gray-300 focus:outline-none focus:ring-4 focus:ring-gray-300"
+        >
+          {/* Flecha izquierda del boton */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-12 lg:w-12"
+          >
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </a>
+
 
         {/* Logos + título */}
        <div className="w-full grid grid-cols-[0.8fr_1.8fr_0.8fr] items-center gap-3 sm:gap-4 lg:gap-6 mb-8 py-3 px-1 sm:px-2 overflow-hidden">
